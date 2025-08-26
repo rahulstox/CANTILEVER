@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <nav>
+        <div class="main-nav container flex">
+            <a href="#" onclick="reload()" class="company-logo">
+                <img src="https://via.placeholder.com/120x40.png?text=NewsApp" alt="company logo">
+            </a>
+            <div class="nav-links">
+                <ul class="flex">
+                    <li class="hover-link nav-item" id="ipl" onclick="onNavItemClick('ipl')">IPL</li>
+                    <li class="hover-link nav-item" id="finance" onclick="onNavItemClick('finance')">Finance</li>
+                    <li class="hover-link nav-item" id="politics" onclick="onNavItemClick('politics')">Politics</li>
+                </ul>
+            </div>
+            <div class="search-bar flex">
+                <input id="search-text" type="text" class="news-input" placeholder="e.g. Science">
+                <button id="search-button" class="search-button">Search</button>
+            </div>
+             <div class="sort-options">
+                <label for="sort-by">Sort by:</label>
+                <select name="sort-by" id="sort-by-select" class="sort-by-dropdown">
+                    <option value="publishedAt">Newest</option>
+                    <option value="relevancy">Relevancy</option>
+                    <option value="popularity">Popularity</option>
+                </select>
+            </div>
+            <div class="user-actions" id="user-actions">
+                <button class="action-button" id="login-btn">Login</button>
+                <button class="action-button" id="register-btn">Register</button>
+            </div>
+            <div class="user-profile" id="user-profile" style="display: none;">
+                <span id="welcome-msg"></span>
+                <button class="action-button" id="logout-btn">Logout</button>
+            </div>
+        </div>
+    </nav>
+    
+    <main>
+        <div class="cards-container container flex" id="cards-container">
+            </div>
+    </main>
+
+    <template id="template-news-card">
+        <div class="card">
+            <div class="card-header">
+                <img src="https://via.placeholder.com/400x200" alt="news-image" id="news-img">
+            </div>
+            <div class="card-content">
+                <h3 id="news-title">This is the Title</h3>
+                <h6 class="news-source" id="news-source">End Gadget 26/08/2023</h6>
+                <p class="news-desc" id="news-desc">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Recusandae saepe quis voluptatum quisquam vitae doloremque facilis molestias quae ratione cumque!</p>
+            </div>
+        </div>
+    </template>
+
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-login">&times;</span>
+            <h2>Login</h2>
+            <form id="login-form">
+                <input type="text" id="login-username" placeholder="Username" required>
+                <input type="password" id="login-password" placeholder="Password" required>
+                <button type="submit" class="search-button">Login</button>
+                <p id="login-error" class="error-msg"></p>
+            </form>
+        </div>
+    </div>
+
+    <div id="register-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" id="close-register">&times;</span>
+            <h2>Register</h2>
+            <form id="register-form">
+                <input type="text" id="register-username" placeholder="Choose a Username" required>
+                <input type="password" id="register-password" placeholder="Choose a Password" required>
+                <button type="submit" class="search-button">Register</button>
+                <p id="register-error" class="error-msg"></p>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
