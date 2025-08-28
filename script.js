@@ -1,4 +1,4 @@
-const API_KEY = "5dce41ade2a64520ab422c4f3b85d846";
+
 const url = "https://newsapi.org/v2/everything?q=";
 
 // State variables to keep track of the current view
