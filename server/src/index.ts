@@ -4,6 +4,8 @@ import mongoose from "mongoose";
 import dotenv from "dotenv";
 import cors from "cors";
 import authRoutes from "./routes/auth"; 
+import articleRoutes from "./routes/articles"; 
+import newsRoutes from "./routes/news";
 // Load environment variables
 dotenv.config();
 
@@ -30,7 +32,9 @@ app.get("/api/health", (req, res) => {
 });
 
 // Use the auth routes
-app.use('/api/auth', authRoutes); // <-- 2. USE THE ROUTER
+app.use('/api/auth', authRoutes);
+app.use('/api/articles', articleRoutes);
+app.use("/api/news", newsRoutes);
 
 app.listen(PORT, () => {
   console.log(`🚀 Server is running on http://localhost:${PORT}`);

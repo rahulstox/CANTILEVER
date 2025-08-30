@@ -1,6 +1,15 @@
 // src/models/User.ts
 import mongoose from "mongoose";
 
+// Define a simple shape for a bookmarked article
+const ArticleSchema = new mongoose.Schema({
+  title: { type: String, required: true },
+  url: { type: String, required: true, unique: true },
+  urlToImage: String,
+  description: String,
+  source: { name: String },
+});
+
 const UserSchema = new mongoose.Schema(
   {
     name: {
@@ -10,14 +19,17 @@ const UserSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
-      unique: true, // No two users can have the same email
+      unique: true,
     },
     password: {
       type: String,
       required: true,
     },
+    // --- ADD THIS ---
+    bookmarkedArticles: [ArticleSchema],
+    // ----------------
   },
   { timestamps: true }
-); // Automatically adds createdAt and updatedAt fields
+);
 
 export default mongoose.model("User", UserSchema);

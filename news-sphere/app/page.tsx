@@ -17,13 +17,22 @@ async function getNews(): Promise<Article[]> {
   if (!apiKey) {
     throw new Error("NEWS_API_KEY is not set in .env.local");
   }
+
+  // A list of popular Indian news source IDs from NewsAPI
+  const sources = "the-times-of-india,the-hindu,google-news-in";
+
+  // Using the 'sources' parameter is more reliable than 'country'
   const response = await fetch(
-    `https://newsapi.org/v2/top-headlines?country=us&apiKey=${apiKey}`,
-    { cache: "no-store" }
+    `https://newsapi.org/v2/top-headlines?sources=${sources}&apiKey=${apiKey}`,
+    {
+      cache: "no-store",
+    }
   );
+
   if (!response.ok) {
     throw new Error("Failed to fetch news");
   }
+
   const data = await response.json();
   return data.articles || [];
 }
