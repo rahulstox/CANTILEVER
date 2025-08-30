@@ -42,13 +42,13 @@ function SearchResults() {
   }, [query]);
 
   if (loading) {
-    return <p className="text-center mt-8">Searching for "{query}"...</p>;
+    return <p className="text-center mt-8">Searching for &quot;{query}&quot;...</p>;
   }
 
   return (
     <div className="container mx-auto p-4">
       <h1 className="text-4xl font-extrabold my-8 text-gray-800">
-        Search Results for "{query}"
+        Search Results for &quot;{query}&quot;
       </h1>
       {articles.length === 0 ? (
         <p className="text-center text-gray-500">

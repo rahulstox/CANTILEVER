@@ -1,9 +1,9 @@
-// app/register/page.tsx
 "use client"; // This is a Client Component because it uses hooks
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "../../lib/api"; // Import our pre-configured api client
+import { AxiosError } from "axios";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -26,11 +26,12 @@ export default function RegisterPage() {
       // On successful registration, redirect to the login page
       console.log("Registration successful:", response.data);
       router.push("/login");
-    } catch (err: any) {
-      // Handle errors, like "user already exists"
-      console.error("Registration failed:", err);
-      if (err.response && err.response.data && err.response.data.message) {
-        setError(err.response.data.message);
+    } catch (err) {
+      const error = err as AxiosError<{ message: string }>;
+      console.error("Registration failed:", error);
+
+      if (error.response?.data?.message) {
+        setError(error.response.data.message);
       } else {
         setError("An unexpected error occurred. Please try again.");
       }
