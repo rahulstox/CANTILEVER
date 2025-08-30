@@ -5,7 +5,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import api from "../../lib/api";
 import { useAuth } from "../context/AuthContext";
-
+import { AxiosError } from "axios";
 
 export default function LoginPage() {
   const { login } = useAuth();
@@ -31,10 +31,17 @@ export default function LoginPage() {
 
       // Redirect to the homepage
       router.push("/");
-    } catch (err: any) {
-      console.error("Login failed:", err);
-      if (err.response && err.response.data && err.response.data.message) {
-        setError(err.response.data.message);
+    } catch (err) {
+      const error = err as AxiosError<{ message: string }>;
+
+      console.error("Login failed:", error);
+
+      if (
+        error.response &&
+        error.response.data &&
+        error.response.data.message
+      ) {
+        setError(error.response.data.message);
       } else {
         setError("An unexpected error occurred. Please try again.");
       }
